@@ -11,25 +11,15 @@
  */
 class Solution {
 public:
-    vector<int> ans;
-    bool sorted(vector<int> arr){
-        for(int i=0; i<arr.size()-1; i++){
-            if(arr[i]>=arr[i+1])
-                return false;
-        }
-        return true;
-    }
-    void inorder(TreeNode* root){
-        if(root!=NULL){
-            inorder(root->left);
-            ans.push_back(root->val);
-            inorder(root->right);
-        }
+    bool validBST(TreeNode* root, long minm, long maxm){
+        if(root==NULL)
+            return true;
+        if(root->val<=minm || root->val>=maxm)
+            return false;
+        return validBST(root->left, minm, root->val) && validBST(root->right, root->val, maxm);
     }
     bool isValidBST(TreeNode* root) {
-        if(root==NULL)
-            return 1;
-        inorder(root);
-        return sorted(ans);
+        long p231=pow(2,31);
+        return validBST(root, -p231-1, p231);
     }
 };
