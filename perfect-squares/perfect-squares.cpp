@@ -1,21 +1,29 @@
 class Solution {
 public:
+    bool perfect(int t){
+        double x = sqrt(t);
+        int y = x;
+        if(x==y){return true;}
+        return false;
+    }
+    int numSquares(int n) {
+        if(perfect(n)){
+            return 1;
+        }
     
-    int solution(int n, vector<int>& dp){
-        if(n<0){return 10005;}
-        
-        if(dp[n]!=-1){return dp[n];}
-        int ans=INT_MAX;
-        for(int i=1; i<=sqrt(n); i++){
-            ans=min(ans, 1+solution(n-i*i, dp));
+        for(int i=1; i*i<=n; i++){
+            if(perfect(n-i*i)){
+                return 2;
+            }
         }
         
-        return dp[n]=ans;
-    }
-    
-    int numSquares(int n) {
-        vector<int> dp(n+1, -1);
-        dp[0]=0;
-        return solution(n, dp);
+        while(n%4==0){
+            n=n/4;
+        }
+        if((n-7)%8==0){
+            return 4;
+        }
+
+        return 3;
     }
 };
