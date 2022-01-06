@@ -1,14 +1,18 @@
 class Solution {
 public:
     vector<vector<string>> ans;
+    int dp[16][16];
     bool checkPalin(string str, int start, int end){
+        if(dp[start][end]!=-1){
+            return dp[start][end];
+        }
         while(start<end){
             if(str[start]!=str[end]){
-                return false;
+                return dp[start][end]=0;
             }
             start++; end--;
         }
-        return true;
+        return dp[start][end]=1;
     }
     void print(vector<string> arr){
         for(auto s: arr)
@@ -38,6 +42,7 @@ public:
     }
     
     vector<vector<string>> partition(string s) {
+        memset(dp, -1, sizeof(dp));
         generate(s, 0, {});
         return ans;
     }
