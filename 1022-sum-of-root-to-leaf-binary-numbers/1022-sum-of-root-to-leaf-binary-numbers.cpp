@@ -11,32 +11,13 @@
  */
 class Solution {
 public:
-    int ans=0;
-    int toNum(vector<int> arr){
-        int count=0, ans=0;
-        for(int i=arr.size()-1; i>=0; i--){
-            if(arr[i]==1)
-                ans+=pow(2, count);
-            count++;
-        }
-        return ans;
-    }
-    void recur(TreeNode* root, vector<int> arr){
-        arr.push_back(root->val);
-        if(root->left==NULL && root->right==NULL){
-            ans+=toNum(arr);
-            return;
-        }
-        if(root->left!=NULL){
-            recur(root->left, arr);
-        }
-        if(root->right!=NULL){
-            recur(root->right, arr);
-        }
-        return;
+    int recur(TreeNode* node, int sum){
+        if(node==NULL) return 0;
+        sum=(sum*2)+node->val;
+        if(node->left==NULL && node->right==NULL) return sum;
+        return recur(node->left, sum)+recur(node->right, sum);
     }
     int sumRootToLeaf(TreeNode* root) {
-        recur(root, {});
-        return ans;
+        return recur(root, 0);
     }
 };
