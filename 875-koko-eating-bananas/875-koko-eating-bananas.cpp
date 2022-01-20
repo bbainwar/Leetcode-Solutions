@@ -10,10 +10,10 @@ public:
     }
     int minEatingSpeed(vector<int>& piles, int h) {
         int low=1, high=INT_MAX, mid;
-        while(low<high){
+        while(low<=high){
             mid=low+(high-low)/2;
             if(check(piles, h, mid)){
-                high=mid;
+                high=mid-1;
             }
             else{
                 low=mid+1;
