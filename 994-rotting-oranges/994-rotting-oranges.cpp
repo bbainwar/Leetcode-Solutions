@@ -3,17 +3,17 @@ public:
     int orangesRotting(vector<vector<int>>& grid) {
         int m=grid.size(), n=grid[0].size();
         queue<pair<int, int>> st;
-        bool ones=false;
+        int ones=0;
         for(int i=0; i<m; i++){
             for(int j=0; j<n; j++){
                 if(grid[i][j]==2){
                     st.push(make_pair(i, j));
                 }
-                else if(!ones && grid[i][j]==1) ones=true;
+                else if(grid[i][j]==1) ones++;
             }
         }
         
-        if(st.empty() && !ones) return 0;
+        if(ones==0) return 0;
         
         vector<int> x{-1, 0, 1, 0};
         vector<int> y{0, -1, 0, 1};
@@ -29,20 +29,21 @@ public:
                     if(xc>=0 && yc>=0 && xc<m && yc<n  && grid[xc][yc]==1){
                         st.push(make_pair(xc, yc));
                         grid[xc][yc]=2;
+                        ones--;
                     }
                 }
             }
         }
         
-        for(int i=0; i<m; i++){
-            for(int j=0; j<n; j++){
-                if(grid[i][j]==1){
-                    return -1;
-                }
-            }
-        }
+//         for(int i=0; i<m; i++){
+//             for(int j=0; j<n; j++){
+//                 if(grid[i][j]==1){
+//                     return -1;
+//                 }
+//             }
+//         }
         
         
-        return minutes-1;
+        return ones==0?minutes-1:-1;
     }
 };
