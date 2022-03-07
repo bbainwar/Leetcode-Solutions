@@ -10,36 +10,60 @@
  */
 class Solution {
 public:
-    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
-        if(l1==NULL && l2==NULL){return NULL;}
-        if(l1==NULL){return l2;}
-        if(l2==NULL){return l1;}
-        
-        ListNode* ans;
-        if(l1->val<l2->val){ans=l1; l1=l1->next;}else{ans=l2; l2=l2->next;}
-        
-        ListNode* s=ans;
-        
-        while(l1!=NULL || l2!=NULL){
-            if(l1==NULL){
-                s->next=l2;
-                break;
-            }else if(l2==NULL){
-                s->next=l1;
-                break;
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        ListNode* temp1=list1;
+        ListNode* temp2=list2;
+        ListNode* ans=NULL;
+        ListNode* prev=NULL;
+        while(temp1!=NULL && temp2!=NULL){
+            if(temp1->val<temp2->val){
+                if(ans==NULL){
+                    ans=new ListNode(temp1->val);
+                    prev=ans;
+                    temp1=temp1->next;
+                }
+                else{
+                    prev->next=new ListNode(temp1->val);
+                    prev=prev->next;
+                    temp1=temp1->next;
+                }
             }
-            if(l1->val<l2->val){
-                s->next=l1;
-                s=l1;
-                l1=l1->next;
-            }else{
-                s->next=l2;
-                s=l2;
-                l2=l2->next;
+            else{
+                if(ans==NULL){
+                    ans=new ListNode(temp2->val);
+                    prev=ans;
+                    temp2=temp2->next;
+                    continue;
+                }
+                else{
+                    prev->next=new ListNode(temp2->val);
+                    prev=prev->next;
+                    temp2=temp2->next;
+                }
             }
         }
-        
+        while(temp1!=NULL){
+            if(ans==NULL){
+                ans=new ListNode(temp1->val);
+                prev=ans;
+                temp1=temp1->next;
+                continue;
+            }
+            prev->next=new ListNode(temp1->val);
+            prev=prev->next;
+            temp1=temp1->next;
+        }
+        while(temp2!=NULL){
+            if(ans==NULL){
+                ans=new ListNode(temp2->val);
+                prev=ans;
+                temp2=temp2->next;
+                continue;
+            }
+            prev->next=new ListNode(temp2->val);
+            prev=prev->next;
+            temp2=temp2->next;
+        }
         return ans;
-        
     }
 };
