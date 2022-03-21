@@ -4,20 +4,13 @@ public:
         vector<int> right(26, -1), ans;
         int n=s.size();
         for(int i=0; i<n; i++) right[s[i]-'a']=i;
-        int ind=0, prev=-1;
-        while(ind<n){
-            int i=ind;
-            int maxm=right[s[i]-'a'];
-            while(i<maxm){
-                if(right[s[i]-'a']>maxm){
-                    maxm=right[s[i]-'a'];
-                }
-                i++;
+        int prev=-1, maxm=0;
+        for(int i=0; i<n; i++){
+            maxm=max(maxm, right[s[i]-'a']);
+            if(i==maxm){
+                ans.push_back(maxm-prev);
+                prev=maxm;
             }
-            ans.push_back(maxm-prev);
-            prev=maxm;
-            if(maxm>=n-1) break;
-            ind=maxm+1;
         }
         return ans;
     }
