@@ -1,5 +1,5 @@
 # Flood fill Algorithm
-## Medium 
+##  Medium 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">An&nbsp;<code>image</code>&nbsp;is represented by a 2-D array of integers, each integer representing the pixel value of the image.</span></p>
 
