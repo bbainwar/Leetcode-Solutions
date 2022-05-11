@@ -12,12 +12,12 @@ class Solution{
     long long maxSubarraySum(int arr[], int n){
         
         // Your code here
-        long long lsum=-1e12, gsum=-1e12;
+        long long lmax=INT_MIN, gmax=INT_MIN;
         for(int i=0; i<n; i++){
-            lsum=max((long long)arr[i], lsum+arr[i]);
-            gsum=max(lsum, gsum);
+            lmax=max(lmax+(long long)arr[i], (long long)arr[i]);
+            gmax=max(lmax, gmax);
         }
-        return gsum;
+        return gmax;
     }
 };
 
