@@ -1,19 +1,7 @@
 class Solution {
 public:
     int dp[105];
-    
-    int conv(string s){
-        if(s.size()==1){
-            return s[0]-'0';
-        }
-        else{
-            int ans=0;
-            ans+=(s[0]-'0')*10;
-            ans+=(s[1]-'0');
-            return ans;
-        }
-    }
-    
+        
     int decode(string s, int b){
         if(b>s.size() || s[b]=='0'){
             return 0;
@@ -25,8 +13,8 @@ public:
         
         int ans=0;
         ans+=decode(s, b+1);
-        int temp=conv(s.substr(b, 2));
-        if(temp>=10 && temp<=26){
+        string temp=s.substr(b, 2);
+        if(temp>="10" && temp<="26"){
             // cout<<temp;
             ans+=decode(s, b+2);
         }
